@@ -6,17 +6,16 @@ import config, {nodeEnv} from './config/env/development';
 const server = express();
 const db = connect();
 
-
 db.once('open', () => {
   listen();
 });
 
 server.set('view engine', 'ejs');
+server.use(express.static('dist'));
 
 server.get('/', (req, res) => {
   res.render('index');
 });
-
 
 function listen() {
   if (server.get('env') === 'test') return;
