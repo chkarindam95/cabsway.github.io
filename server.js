@@ -10,12 +10,16 @@ db.once('open', () => {
   listen();
 });
 
+var users = require('./routes/users');
+
 server.set('view engine', 'ejs');
 server.use(express.static('dist'));
 
 server.get('/', (req, res) => {
   res.render('index');
 });
+
+server.use('/users', users);
 
 function listen() {
   if (server.get('env') === 'test') return;
