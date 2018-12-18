@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var BookingSchema = new mongoose.Schema({
+const BookingSchema = new mongoose.Schema({
   user: { type : Schema.ObjectId, ref : 'User' },
   drivers: [{
     driver: { type : Schema.ObjectId, ref : 'Driver' }

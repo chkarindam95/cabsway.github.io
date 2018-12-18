@@ -1,6 +1,6 @@
 import User from '../models/User';
 
-var userController = {};
+const userController = {};
 
 userController.list = function(req, res) {
   User.find({}).exec(function (err, users) {
@@ -14,7 +14,7 @@ userController.list = function(req, res) {
 };
 
 userController.create = function(req, res) {
-  var user = new User(req.body);
+  const user = new User(req.body);
   user.save();
 
 };

@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var LocationSchema = new mongoose.Schema({
+const LocationSchema = new mongoose.Schema({
   address: String,
   latitude: String,
   longitude: String,

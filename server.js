@@ -10,7 +10,7 @@ db.once('open', () => {
   listen();
 });
 
-var users = require('./routes/users');
+const users = require('./routes/users');
 
 server.set('view engine', 'ejs');
 server.use(express.static('dist'));
@@ -32,7 +32,7 @@ function listen() {
 
 // Connection with the database
 function connect() {
-  let options = { 
+  const options = { 
     useNewUrlParser: true 
   };
 
