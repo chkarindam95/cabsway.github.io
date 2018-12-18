@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
   uui: Number,
+  admin: { type: Boolean, default: false },
   firstName: String,
   lastName: String,
   email: String,
