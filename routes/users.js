@@ -13,3 +13,4 @@ router.get('/create', function(req, res) {
   user.create(req, res);
 });
 
+module.exports = router;
