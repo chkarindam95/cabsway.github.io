@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 var BookingSchema = new mongoose.Schema({
   user: { type : Schema.ObjectId, ref : 'User' },
+  drivers: [{
+    driver: { type : Schema.ObjectId, ref : 'Driver' }
+  }],
   uui: Number,
   message: String,
   flightNo: String,
