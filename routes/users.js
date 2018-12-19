@@ -13,4 +13,8 @@ router.get('/create', function(req, res) {
   user.create(req, res);
 });
 
+router.get('/:id', function(req, res) {
+  user.show(req, res);
+});
+
 module.exports = router;
