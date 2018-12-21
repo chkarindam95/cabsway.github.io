@@ -41,4 +41,13 @@ userController.create = function(req, res) {
   });
 };
 
+userController.delete = function(req, res) {
+  const userId = req.params._id;
+
+  User.findByIdAndDelete(userId, function(err, user) {
+    if (err) return res.json(err);
+    res.json(user);
+  });
+};
+
 module.exports = userController;

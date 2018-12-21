@@ -16,4 +16,8 @@ router.get('/:_id', function(req, res) {
   user.show(req, res);
 });
 
+router.delete('/:_id', function(req, res) {
+  user.delete(req, res);
+});
+
 module.exports = router;
