@@ -34,7 +34,11 @@ userController.show = function(req, res) {
 
 userController.create = function(req, res) {
   const user = new User(req.body);
-  user.save();
+
+  user.save(function(err, user) {
+    if (err) return res.json(err);
+    res.send('User ' + user.firstName + ' successfully created!');
+  });
 };
 
 module.exports = userController;
