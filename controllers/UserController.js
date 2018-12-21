@@ -20,16 +20,10 @@ userController.show = function(req, res) {
     return 'throw an error, id is undegined';
   }
 
-  User.
-    find(
-      {
-        _id: userId
-      }
-    )
-    .exec(function (err, user) {
-      if (err) return res.json(err);
-      res.send(user);
-    });
+  User.findById(userId, function (err, user) {
+    if (err) return res.json(err);
+    res.send(user); 
+  });
 };
 
 userController.create = function(req, res) {
