@@ -8,12 +8,11 @@ router.get('/', function(req, res) {
   user.list(req, res);
 });
 
-router.get('/create', function(req, res) {
-  res.send('tet create');
+router.post('/', function(req, res) {
   user.create(req, res);
 });
 
-router.get('/:id', function(req, res) {
+router.get('/:_id', function(req, res) {
   user.show(req, res);
 });
 

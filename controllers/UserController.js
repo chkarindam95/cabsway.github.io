@@ -14,7 +14,7 @@ userController.list = function(req, res) {
 };
 
 userController.show = function(req, res) {
-  const userId = req.params.id;
+  const userId = req.params._id;
 
   if (typeof userId === 'undefined') {
     return 'throw an error, id is undegined';
@@ -23,13 +23,11 @@ userController.show = function(req, res) {
   User.
     find(
       {
-        id: userId
+        _id: userId
       }
     )
     .exec(function (err, user) {
-      if (err) {
-        console.error('Error:', err);
-      }
+      if (err) return res.json(err);
       res.send(user);
     });
 };
