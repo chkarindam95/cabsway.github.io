@@ -20,4 +20,8 @@ router.delete('/:_id', function(req, res) {
   user.delete(req, res);
 });
 
+router.put('/:_id', function(req, res) {
+  user.update(req, res);
+});
+
 module.exports = router;

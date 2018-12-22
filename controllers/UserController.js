@@ -44,4 +44,19 @@ userController.delete = function(req, res) {
   });
 };
 
+userController.update = function(req, res) {
+  const userId = req.params._id;
+
+  const options = {
+    new: true,
+    runValidators: true
+  };
+
+  // sanitize req.query
+  User.findByIdAndUpdate(userId, req.query, options,  function(err, user) {
+    if (err) return res.json(err);
+    res.json(user);
+  });
+};
+
 module.exports = userController;
