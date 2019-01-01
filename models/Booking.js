@@ -9,13 +9,25 @@ const BookingSchema = new mongoose.Schema({
   uui: Number,
   message: String,
   flightNo: String,
-  passengers: Number,
-  oneWay: Boolean,
+  passengers: {
+    adults: Number,
+    children: Number,
+    infants: Number
+  },
+  oneWay: {
+    type: Boolean,
+    default: true
+  },
   departure: String,
   arrival: String,
   departureTimestamp: { type: Date },
   arrivalTimestamp: { type: Date },
-  returnTimestamp: { type: Date },
+  returnTimestamp: { 
+    type: Date,
+    required: function() {
+      return !this.oneWay;
+    }
+  },
   duration: Number,
   distance: Number,
   confirmationToken: String,
