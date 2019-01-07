@@ -1,4 +1,3 @@
-# taxi-website
 Booking system for taxi
 
 ## Quick start
