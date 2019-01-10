@@ -8,9 +8,11 @@ const BookingSchema = new mongoose.Schema({
   }],
   uui: Number,
   message: String,
-  flightNo: String,
   passengers: {
-    adults: Number,
+    adults: { 
+      type: Number,
+      required: true
+    },
     children: Number,
     infants: Number
   },
@@ -18,8 +20,16 @@ const BookingSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  departure: String,
-  arrival: String,
+  departure: {
+    type: String,
+    required: true
+  },
+  arrival: {
+    type: String,
+    required: true
+  },
+  // #TODO required: if the departure or arrival is the airport
+  flightNo: String,  
   departureTimestamp: { type: Date },
   arrivalTimestamp: { type: Date },
   returnTimestamp: { 
@@ -33,8 +43,8 @@ const BookingSchema = new mongoose.Schema({
   confirmationToken: String,
   confirmedAt: { type: Date },
   confirmationSentAt: { type: Date },
-  createdAt: { type: Date },
-  updatedAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date },
 });
 
 module.exports = mongoose.model('Booking', BookingSchema);
