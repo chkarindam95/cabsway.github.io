@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
+import bodyParser from 'body-parser';
 import config, {nodeEnv} from './config/env/development';
 
 const server = express();
@@ -11,6 +11,10 @@ db.once('open', () => {
 });
 
 const users = require('./routes/users');
+const bookings = require('./routes/bookings');
+
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: false }));
 
 server.set('view engine', 'ejs');
 server.use(express.static('dist'));
@@ -20,6 +24,9 @@ server.get('/', (req, res) => {
 });
 
 server.use('/users', users);
+server.use('/bookings', bookings);
+
+// Connection
 
 function listen() {
   if (server.get('env') === 'test') return;
