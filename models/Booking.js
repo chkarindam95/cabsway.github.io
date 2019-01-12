@@ -28,12 +28,27 @@ const BookingSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // #TODO required: if the departure or arrival is the airport
-  flightNo: String,  
-  departureTimestamp: { type: Date },
+  flightNo: {
+    type: String,
+    required: function() {
+      return this.departure == 'Thessaloniki Airport';
+    }
+  }, 
+  // #NOTE validation
+  // departure cannot be earlier than now 
+  departureTimestamp: { 
+    type: Date,
+    required: true 
+  },
   arrivalTimestamp: { type: Date },
   returnTimestamp: { 
     type: Date,
+    validate: {
+      validator: function(currentValue){
+        return  currentValue > this.departureTimestamp;
+      },
+      message: 'return date cannot be earlier than the departing date'
+    },
     required: function() {
       return !this.oneWay;
     }
@@ -44,7 +59,7 @@ const BookingSchema = new mongoose.Schema({
   confirmedAt: { type: Date },
   confirmationSentAt: { type: Date },
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date },
+  updatedAt: { type: Date }
 });
 
 module.exports = mongoose.model('Booking', BookingSchema);
