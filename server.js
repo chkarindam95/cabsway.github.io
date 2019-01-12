@@ -12,6 +12,7 @@ db.once('open', () => {
 
 const users = require('./routes/users');
 const bookings = require('./routes/bookings');
+const location = require('./routes/location');
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
@@ -25,6 +26,7 @@ server.get('/', (req, res) => {
 
 server.use('/users', users);
 server.use('/bookings', bookings);
+server.use('/location', location);
 
 // Connection
 
