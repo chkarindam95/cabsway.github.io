@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+import pointSchema from './shared/point';
 
 const LocationSchema = new mongoose.Schema({
   address: {
@@ -6,8 +7,10 @@ const LocationSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  latitude: String,
-  longitude: String,
+  location: {
+    type: pointSchema,
+    required: true
+  },
   createdAt: { type: Date },
   updatedAt: { type: Date, default: Date.now },
   createdBy: { type: String, default: 'System' }
