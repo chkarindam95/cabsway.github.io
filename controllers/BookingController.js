@@ -34,4 +34,31 @@ bookingController.create = function(req, res) {
   });
 };
 
+bookingController.delete = function(req, res) {
+  Booking
+    .findByIdAndDelete(req.params.id)
+    .exec( function (err, bookings) {
+      if (err) return res.send(err);
+      res.send(bookings);
+    });
+};
+// #TODO define what fields allowed to be updated
+bookingController.update = function(req, res) {
+  const options = {
+    new: true,
+    runValidators: true
+  };
+
+  Booking
+    .findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      options,
+      function (err, booking) {
+        if (err) return res.send(err);
+        res.send(booking);
+      }
+    );
+};
+
 module.exports = bookingController;

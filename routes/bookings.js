@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
 });
 
 /** Create a new booking
- *  @oarams: 
+ * 
  */
 router.post('/',  function(req, res) {
   booking.create(req, res);
@@ -22,6 +22,21 @@ router.post('/',  function(req, res) {
  */
 router.get('/:id',  function(req, res) {
   booking.show(req, res);
+});
+
+/** Delete an existing booking
+ *  @oarams id number
+ */
+router.delete('/:id',  function(req, res) {
+  booking.delete(req, res);
+});
+
+/** Update an existing booking
+ *  @oarams id number
+ */
+
+router.put('/:id',  function(req, res) {
+  booking.update(req, res);
 });
 
 module.exports = router;
