@@ -3,27 +3,30 @@ import User from '../models/User';
 const userController = {};
 
 userController.list = function(req, res) {
-  User.find({}).exec(function (err, users) {
-    if (err) {
-      console.error('Error:', err);
-    }
-    else {
-      res.send(users);
-    }
-  });
+  User.find({}).exec(
+    function (err, users) {
+      if (err) {
+        console.error('Error:', err);
+      }
+      else {
+        res.send(users);
+      }
+    });
 };
 
 userController.show = function(req, res) {
   const userId = req.params._id;
 
   if (typeof userId === 'undefined') {
-    return 'throw an error, id is undegined';
+    return 'throw an error, id is undefined';
   }
 
-  User.findById(userId, function (err, user) {
-    if (err) return res.json(err);
-    res.send(user); 
-  });
+  User.findById(
+    userId, 
+    function (err, user) {
+      if (err) return res.json(err);
+      res.send(user); 
+    });
 };
 
 userController.create = function(req, res) {
@@ -31,32 +34,36 @@ userController.create = function(req, res) {
 
   user.save(function(err, user) {
     if (err) return res.json(err);
-    res.send('User ' + user.firstName + ' successfully created!');
+    res.send(`User ${user.firstName} successfully created!`);
   });
 };
 
 userController.delete = function(req, res) {
   const userId = req.params._id;
 
-  User.findByIdAndDelete(userId, function(err, user) {
-    if (err) return res.json(err);
-    res.json(user);
-  });
+  User.findByIdAndDelete(
+    userId, 
+    function(err, user) {
+      if (err) return res.json(err);
+      res.json(user);
+    });
 };
 
 userController.update = function(req, res) {
-  const userId = req.params._id;
-
   const options = {
     new: true,
     runValidators: true
   };
 
   // sanitize req.query
-  User.findByIdAndUpdate(userId, req.query, options,  function(err, user) {
-    if (err) return res.json(err);
-    res.json(user);
-  });
+  User.findByIdAndUpdate(
+    req.params._id, 
+    req.query, 
+    options, 
+    function(err, user) {
+      if (err) return res.json(err);
+      res.json(user);
+    });
 };
 
 module.exports = userController;
