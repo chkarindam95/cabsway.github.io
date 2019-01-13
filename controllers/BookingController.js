@@ -1,5 +1,4 @@
 import Booking from '../models/Booking';
-import User from '../models/User';
 
 const bookingController = {};
 
@@ -26,7 +25,6 @@ bookingController.show = function(req, res) {
 
 bookingController.create = function(req, res) {
   const booking = new Booking(req.body);
-  const user = User.findById(userId);
 
   booking.save(function(err, booking) {
     if (err) return res.json(err);
