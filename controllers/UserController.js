@@ -1,21 +1,18 @@
 import User from '../models/User';
+import Booking from '../models/Booking';
 
 const userController = {};
 
 userController.list = function(req, res) {
   User.find({}).exec(
     function (err, users) {
-      if (err) {
-        console.error('Error:', err);
-      }
-      else {
-        res.send(users);
-      }
+      if (err) return res.send(err);
+      res.send(users);
     });
 };
 
 userController.show = function(req, res) {
-  const userId = req.params._id;
+  const userId = req.params.id;
 
   if (typeof userId === 'undefined') {
     return 'throw an error, id is undefined';
@@ -39,7 +36,7 @@ userController.create = function(req, res) {
 };
 
 userController.delete = function(req, res) {
-  const userId = req.params._id;
+  const userId = req.params.id;
 
   User.findByIdAndDelete(
     userId, 
@@ -57,13 +54,24 @@ userController.update = function(req, res) {
 
   // sanitize req.query
   User.findByIdAndUpdate(
-    req.params._id, 
+    req.params.id, 
     req.query, 
     options, 
     function(err, user) {
       if (err) return res.json(err);
       res.json(user);
     });
+};
+
+userController.bookings = function(req, res) {
+  Booking
+    .find({user: req.params.id})
+    .exec(
+      function (err, bookings) {
+        if (err)  res.send(err);
+        res.send(bookings);
+      }
+    );
 };
 
 module.exports = userController;

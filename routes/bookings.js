@@ -17,4 +17,11 @@ router.post('/',  function(req, res) {
   booking.create(req, res);
 });
 
+/** Get an existing booking
+ *  @oarams id number
+ */
+router.get('/:id',  function(req, res) {
+  booking.show(req, res);
+});
+
 module.exports = router;
