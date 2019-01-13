@@ -10,6 +10,7 @@ db.once('open', () => {
   listen();
 });
 
+const prices = require('./routes/prices');
 const users = require('./routes/users');
 const bookings = require('./routes/bookings');
 const location = require('./routes/location');
@@ -24,6 +25,7 @@ server.get('/', (req, res) => {
   res.render('index');
 });
 
+server.use('/prices', prices);
 server.use('/users', users);
 server.use('/bookings', bookings);
 server.use('/location', location);
