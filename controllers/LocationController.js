@@ -12,6 +12,15 @@ locationController.list = function(req, res) {
   });
 };
 
+locationController.show = function(req, res) {
+  Location
+    .findById(req.params.id)
+    .exec(function (err, location) {
+      if (err) return res.send(err);
+      res.send(location);
+    });
+};
+
 locationController.create = function(req, res) {
   const location = new Location(req.body);
 
@@ -22,7 +31,7 @@ locationController.create = function(req, res) {
 };
 
 locationController.update = function(req, res) {
-  const locationId = req.params._id;
+  const locationId = req.params.id;
 
   const options = {
     new: true,
@@ -40,7 +49,7 @@ locationController.update = function(req, res) {
 };
 
 locationController.delete = function(req, res) {
-  const locationId = req.params._id;
+  const locationId = req.params.id;
 
   Location.findByIdAndDelete(
     locationId, 

@@ -24,10 +24,18 @@ router.post('/', function(req, res) {
 });
 
 /**
+ * Get an existing location
+ * @params Number id location id
+ */
+router.get('/:id', function(req, res) {
+  location.show(req, res);
+});
+
+/**
  * Update an existing location
  * @params Number id location id
  */
-router.put('/:_id', function(req, res) {
+router.put('/:id', function(req, res) {
   location.update(req, res);
 });
 
@@ -35,7 +43,7 @@ router.put('/:_id', function(req, res) {
  * Delete an existing location
  * @params Number id location id
  */
-router.delete('/:_id', function(req, res) {
+router.delete('/:id', function(req, res) {
   location.delete(req, res);
 });
 
