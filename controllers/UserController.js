@@ -1,5 +1,6 @@
 import User from '../models/User';
 import Booking from '../models/Booking';
+const bcrypt =  require('bcryptjs');
 
 const userController = {};
 
@@ -27,12 +28,31 @@ userController.show = function(req, res) {
 };
 
 userController.create = function(req, res) {
-  const user = new User(req.body);
 
-  user.save(function(err, user) {
-    if (err) return res.json(err);
-    res.send(`User ${user.firstName} successfully created!`);
-  });
+  User
+    .findOne(
+      { 
+        email: req.body.email
+      }
+    )
+    .then(user => {
+      if (user) return res.json('{message: Already exists}');
+      
+      bcrypt
+        .hash(req.body.password, 12)
+        .then(hash => {
+          req.body.encryptedPassword = hash;
+          const user = new User(req.body);
+          user.save(function(err, user) {
+            if (err) return res.json(err);
+            res.send(`User ${user.firstName} successfully created!`);
+          });
+        });
+    })
+    .catch(error => {
+      console.error(error);
+      res.send(error);
+    });
 };
 
 userController.delete = function(req, res) {

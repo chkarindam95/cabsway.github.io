@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     lowercase: true,
+    index: true,
     required: 'Email address is required',
     unique: true
   },
@@ -37,5 +38,6 @@ const UserSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
   lastSignInAt: { type: Date },
 });
+
 
 module.exports = mongoose.model('User', UserSchema);
