@@ -34,7 +34,6 @@ router.delete('/:id',  function(req, res) {
 /** Update an existing booking
  *  @oarams id number
  */
-
 router.put('/:id',  function(req, res) {
   booking.update(req, res);
 });
