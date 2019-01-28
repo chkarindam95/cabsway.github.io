@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     lowercase: true,
     index: true,
+    unique: true,
     required: 'Email address is required'
   },
   phone: {
@@ -37,6 +38,5 @@ const UserSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
   lastSignInAt: { type: Date },
 });
-
 
 module.exports = mongoose.model('User', UserSchema);
